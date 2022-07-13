@@ -1,4 +1,4 @@
-# anki
+# words dictionary
 
 A new Flutter project.
 
