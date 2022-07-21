@@ -43,16 +43,3 @@ final getCounterProvider =
 );
 
 final counterProvider = getCounterProvider(2);
-
-final backgroundColorProvider = Provider.autoDispose((ref) {
-  final counter = ref.watch(counterProvider);
-
-  switch (counter.level) {
-    case CounterValueLevel.normal:
-      return Colors.transparent;
-    case CounterValueLevel.hight:
-      return Colors.yellowAccent;
-    case CounterValueLevel.tooHight:
-      return Colors.redAccent;
-  }
-});

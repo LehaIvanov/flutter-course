@@ -30,6 +30,9 @@ class CounterPage extends ConsumerWidget {
       }
     }));
 
+    final counter = ref.watch(counterProvider);
+    final backgroundColor = _getBackgroundColorByLevel(counter.level);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Counter page'),
@@ -43,10 +46,10 @@ class CounterPage extends ConsumerWidget {
         ],
       ),
       body: Container(
-        color: ref.watch(backgroundColorProvider),
+        color: backgroundColor,
         child: Center(
           child: Text(
-            ref.watch(counterProvider).value.toString(),
+            counter.value.toString(),
             style: const TextStyle(
                 fontSize: 96,
                 fontWeight: FontWeight.bold,
@@ -61,5 +64,16 @@ class CounterPage extends ConsumerWidget {
         },
       ),
     );
+  }
+}
+
+Color _getBackgroundColorByLevel(CounterValueLevel level) {
+  switch (level) {
+    case CounterValueLevel.normal:
+      return Colors.transparent;
+    case CounterValueLevel.hight:
+      return Colors.yellowAccent;
+    case CounterValueLevel.tooHight:
+      return Colors.redAccent;
   }
 }
