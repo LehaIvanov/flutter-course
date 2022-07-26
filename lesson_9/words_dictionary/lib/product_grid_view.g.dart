@@ -6,9 +6,9 @@ part of 'product_grid_view.dart';
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class ProductGridView extends HookWidget {
+class ProductGridView extends HookConsumerWidget {
   const ProductGridView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context) => _productGridView();
+  Widget build(BuildContext _context, WidgetRef _ref) => _productGridView(_ref);
 }

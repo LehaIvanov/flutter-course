@@ -33,6 +33,9 @@ dependencies:
   flutter_hooks: ^0.18.5+1
   freezed_annotation: ^2.1.0
   decimal: ^2.2.0
+  hooks_riverpod: ^2.0.0-dev.9
+  flutter_svg: ^1.1.1+1
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
