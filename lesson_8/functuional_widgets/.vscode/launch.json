@@ -1,0 +1,71 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "stage0 (release)",
+      "program": "packages/stage0/lib/main.dart",
+      "flutterMode": "release",
+      "type": "dart",
+      "request": "launch"
+    },
+    {
+      "name": "stage0 (debug)",
+      "program": "packages/stage0/lib/main.dart",
+      "flutterMode": "debug",
+      "type": "dart",
+      "request": "launch"
+    },
+    {
+      "name": "stage0 (profile)",
+      "program": "packages/stage0/lib/main.dart",
+      "flutterMode": "profile",
+      "type": "dart",
+      "request": "launch"
+    },
+    {
+      "name": "stage1 (release)",
+      "program": "packages/stage1/lib/main.dart",
+      "flutterMode": "release",
+      "type": "dart",
+      "request": "launch"
+    },
+    {
+      "name": "stage1 (debug)",
+      "program": "packages/stage1/lib/main.dart",
+      "flutterMode": "debug",
+      "type": "dart",
+      "request": "launch"
+    },
+    {
+      "name": "stage1 (profile)",
+      "program": "packages/stage1/lib/main.dart",
+      "flutterMode": "profile",
+      "type": "dart",
+      "request": "launch"
+    },
+    {
+      "name": "draggable (release)",
+      "program": "packages/draggable/lib/main.dart",
+      "flutterMode": "release",
+      "type": "dart",
+      "request": "launch"
+    },
+    {
+      "name": "draggable (debug)",
+      "program": "packages/draggable/lib/main.dart",
+      "flutterMode": "debug",
+      "type": "dart",
+      "request": "launch"
+    },
+    {
+      "name": "draggable (profile)",
+      "program": "packages/draggable/lib/main.dart",
+      "flutterMode": "profile",
+      "type": "dart",
+      "request": "launch"
+    },
+  ]
+}
