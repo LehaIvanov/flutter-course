@@ -23,7 +23,11 @@ Widget _productGridView(WidgetRef ref) {
     }
   }
 
-  scrollController.addListener(onScrollChanged);
+  useEffect(() {
+    scrollController.addListener(onScrollChanged);
+
+    return null;
+  }, []);
 
   final context = useContext();
   final mediaQueryData = MediaQuery.of(context);

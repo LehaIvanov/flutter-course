@@ -6,6 +6,7 @@ import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:layout_builder/data/product.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:layout_builder/data/product_service.dart';
+import 'package:layout_builder/display_mode_provider.dart';
 import 'package:layout_builder/product_card.dart';
 
 part 'product_grid_view.g.dart';
@@ -23,15 +24,18 @@ Widget _productGridView(WidgetRef ref) {
     }
   }
 
-  scrollController.addListener(onScrollChanged);
+  useEffect(() {
+    scrollController.addListener(onScrollChanged);
 
-  final context = useContext();
-  final mediaQueryData = MediaQuery.of(context);
+    return null;
+  }, []);
+
+  final displayMode = ref.watch(displayModeProvider);
 
   return GridView(
     padding: const EdgeInsets.all(24),
     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: _getCrossAxisCount(mediaQueryData.size.width),
+      crossAxisCount: _getCrossAxisCount(displayMode),
       crossAxisSpacing: 24,
       mainAxisSpacing: 24,
       childAspectRatio: 0.75,
@@ -45,13 +49,14 @@ Widget _productGridView(WidgetRef ref) {
   );
 }
 
-int _getCrossAxisCount(double width) {
-  if (width < 500) {
-    return 2;
-  } else if (width < 1100) {
-    return 4;
-  } else {
-    return 6;
+int _getCrossAxisCount(DisplayMode mode) {
+  switch (mode) {
+    case DisplayMode.mobile:
+      return 2;
+    case DisplayMode.tablet:
+      return 4;
+    case DisplayMode.desktop:
+      return 6;
   }
 }
 

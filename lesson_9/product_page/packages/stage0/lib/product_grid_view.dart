@@ -23,7 +23,11 @@ Widget _productGridView(WidgetRef ref) {
     }
   }
 
-  scrollController.addListener(onScrollChanged);
+  useEffect(() {
+    scrollController.addListener(onScrollChanged);
+
+    return null;
+  }, []);
 
   return GridView(
     padding: const EdgeInsets.all(24),

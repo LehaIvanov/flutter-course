@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:layout_builder/display_mode_provider.dart';
 import 'package:layout_builder/product_grid_view.dart';
 
 part 'product_page_app.g.dart';
@@ -10,10 +11,12 @@ Widget _productPageApp() => MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Product page'),
+      home: DisplayModeScope(
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Product page'),
+          ),
+          body: const ProductGridView(),
         ),
-        body: const ProductGridView(),
       ),
     );
