@@ -43,29 +43,3 @@ Widget __imageContainer({required String image}) {
     ],
   );
 }
-
-/*
-class _ImageContainer extends StatelessWidget {
-  const _ImageContainer({Key? key, required this.image}) : super(key: key);
-
-  final String image;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
-          ),
-        ),
-        Positioned(
-          right: 4,
-          top: 4,
-          child: SvgPicture.asset('assets/icons/heart.svg'),
-        ),
-      ],
-    );
-  }
-}
-*/
