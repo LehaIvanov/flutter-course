@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-import 'package:stage0/data/product.dart';
+import 'package:media_query/data/product.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:stage0/data/product_service.dart';
-import 'package:stage0/product_card.dart';
+import 'package:media_query/data/product_service.dart';
+import 'package:media_query/product_card.dart';
 
 part 'product_grid_view.g.dart';
 
@@ -25,10 +25,13 @@ Widget _productGridView(WidgetRef ref) {
 
   scrollController.addListener(onScrollChanged);
 
+  final context = useContext();
+  final mediaQueryData = MediaQuery.of(context);
+
   return GridView(
     padding: const EdgeInsets.all(24),
-    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 5,
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: _getCrossAxisCount(mediaQueryData.size.width),
       crossAxisSpacing: 24,
       mainAxisSpacing: 24,
       childAspectRatio: 0.75,
@@ -40,6 +43,16 @@ Widget _productGridView(WidgetRef ref) {
         )
         .toList(),
   );
+}
+
+int _getCrossAxisCount(double width) {
+  if (width < 500) {
+    return 2;
+  } else if (width < 1100) {
+    return 4;
+  } else {
+    return 6;
+  }
 }
 
 class _ProductGridViewNotifier extends StateNotifier<List<Product>> {
