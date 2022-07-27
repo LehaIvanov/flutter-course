@@ -27,19 +27,33 @@ Widget _productCard({required Product product}) {
 }
 
 @swidget
-Widget __imageContainer({required String image}) {
-  return Stack(
-    children: [
-      Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
-        ),
-      ),
-      Positioned(
-        right: 4,
-        top: 4,
-        child: SvgPicture.asset('assets/icons/heart.svg'),
-      ),
-    ],
-  );
+Widget __imageContainer(BuildContext context, {required String image}) {
+  final mediaQuerySize = MediaQuery.of(context).size;
+
+  return LayoutBuilder(
+      builder: (context, constraints) => Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(image), fit: BoxFit.cover),
+                ),
+              ),
+              Positioned(
+                right: 4,
+                top: 4,
+                child: SvgPicture.asset('assets/icons/heart.svg'),
+              ),
+              Center(
+                  child: Text(
+                '${constraints.maxWidth}\r\n${mediaQuerySize.width}',
+                style: const TextStyle(
+                  fontSize: 32,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  backgroundColor: Colors.white,
+                ),
+              )),
+            ],
+          ));
 }
