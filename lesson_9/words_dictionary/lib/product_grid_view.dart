@@ -15,6 +15,14 @@ Widget _productGridView(WidgetRef ref) {
   final products = ref.watch(_productGridViewProvider);
   final notifier = ref.read(_productGridViewProvider.notifier);
 
+  final scrollController = useScrollController(initialScrollOffset: 5.0);
+  scrollController.addListener(() {
+    if (scrollController.offset >= scrollController.position.maxScrollExtent &&
+        !scrollController.position.outOfRange) {
+      notifier.loadProducts();
+    }
+  });
+
   return GridView(
     padding: const EdgeInsets.all(24),
     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -23,7 +31,7 @@ Widget _productGridView(WidgetRef ref) {
       mainAxisSpacing: 24,
       childAspectRatio: 0.75,
     ),
-    controller: notifier.scrollController,
+    controller: scrollController,
     children: products
         .map(
           (product) => ProductCard(product: product),
@@ -33,11 +41,7 @@ Widget _productGridView(WidgetRef ref) {
 }
 
 class _ProductGridViewNotifier extends StateNotifier<List<Product>> {
-  _ProductGridViewNotifier() : super(_getProducts()) {
-    scrollController.addListener(_scrollListener);
-  }
-
-  final scrollController = ScrollController(initialScrollOffset: 5.0);
+  _ProductGridViewNotifier() : super(_getProducts());
 
   static const _productPageSize = 20;
   static final _random = Random();
@@ -46,21 +50,8 @@ class _ProductGridViewNotifier extends StateNotifier<List<Product>> {
     state = [...state, ..._getProducts()];
   }
 
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
-  }
-
   static List<Product> _getProducts() =>
       List<Product>.generate(_productPageSize, (_) => getProduct(_random));
-
-  void _scrollListener() {
-    if (scrollController.offset >= scrollController.position.maxScrollExtent &&
-        !scrollController.position.outOfRange) {
-      loadProducts();
-    }
-  }
 }
 
 final _productGridViewProvider =
