@@ -11,34 +11,45 @@ enum DisplayMode {
   desktop,
 }
 
-// class _DisplayModeNotifier extends StateNotifier<DisplayMode> {
-//   _DisplayModeNotifier() : super(DisplayMode.desktop);
-
-//   void applyWidth(double width) {
-//     if (width < 500) {
-//       state = DisplayMode.mobile;
-//     } else if (width < 1100) {
-//       state = DisplayMode.tablet;
-//     } else {
-//       state = DisplayMode.desktop;
-//     }
-//   }
-// }
-
-// final displayModeProvider =
-//     StateNotifierProvider<_DisplayModeNotifier, DisplayMode>(
-//         (_) => _DisplayModeNotifier());
-
-@hcwidget
-Widget _displayModeScope(WidgetRef ref, {required Widget child}) {
+@hwidget
+Widget _displayModeScope({required Widget child}) {
   final width = MediaQuery.of(useContext()).size.width;
-  useEffect(() {
-    Future.microtask(() {
-      ref.read(displayModeProvider.notifier).applyWidth(width);
-    });
 
-    return null;
-  }, [width]);
+  return DisplayModeProvider(
+    displayWidth: width,
+    child: child,
+  );
+}
 
-  return child;
+class DisplayModeProvider extends InheritedWidget {
+  const DisplayModeProvider({
+    Key? key,
+    required Widget child,
+    required this.displayWidth,
+  }) : super(key: key, child: child);
+
+  final double displayWidth;
+
+  DisplayMode get mode {
+    if (displayWidth < 500) {
+      return DisplayMode.mobile;
+    } else if (displayWidth < 1100) {
+      return DisplayMode.tablet;
+    } else {
+      return DisplayMode.desktop;
+    }
+  }
+
+  @override
+  bool updateShouldNotify(DisplayModeProvider oldWidget) =>
+      mode != oldWidget.mode;
+
+  static DisplayMode of(BuildContext context) {
+    final DisplayModeProvider? result =
+        context.dependOnInheritedWidgetOfExactType<DisplayModeProvider>();
+    if (result == null) {
+      throw Exception('No DisplayModeProvider found in context');
+    }
+    return result.mode;
+  }
 }

@@ -6,12 +6,11 @@ part of 'display_mode_provider.dart';
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class DisplayModeScope extends HookConsumerWidget {
+class DisplayModeScope extends HookWidget {
   const DisplayModeScope({Key? key, required this.child}) : super(key: key);
 
   final Widget child;
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) =>
-      _displayModeScope(_ref, child: child);
+  Widget build(BuildContext _context) => _displayModeScope(child: child);
 }

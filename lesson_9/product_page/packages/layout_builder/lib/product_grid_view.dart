@@ -30,7 +30,7 @@ Widget _productGridView(WidgetRef ref) {
     return null;
   }, []);
 
-  final displayMode = ref.watch(displayModeProvider);
+  final displayMode = DisplayModeProvider.of(useContext());
 
   return GridView(
     padding: const EdgeInsets.all(24),
