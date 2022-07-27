@@ -45,6 +45,27 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
+        },
+        {
+            "name": "layout_builder (debug)",
+            "program": "packages/layout_builder/lib/main.dart",
+            "flutterMode": "debug",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "layout_builder (profile)",
+            "program": "packages/layout_builder/lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "layout_builder (release)",
+            "program": "packages/layout_builder/lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
         }
     ]
 }
