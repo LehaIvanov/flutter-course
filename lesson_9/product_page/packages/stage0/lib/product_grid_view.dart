@@ -6,9 +6,6 @@ import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:stage0/data/product.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stage0/data/product_service.dart';
-import 'package:stage0/display_mode.dart';
-import 'package:stage0/display_mode_provider.dart';
-import 'package:stage0/display_mode_state.dart';
 import 'package:stage0/product_card.dart';
 
 part 'product_grid_view.g.dart';
@@ -32,16 +29,10 @@ Widget _productGridView(WidgetRef ref) {
     return null;
   }, []);
 
-  // final context = useContext();
-  // final mode = DisplayModeProvider.of(context);
-  final mode = ref.watch(displayModeProvider);
-
-  print('build');
-
   return GridView(
     padding: const EdgeInsets.all(24),
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: _getCrossAxisCount(mode),
+    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 5,
       crossAxisSpacing: 24,
       mainAxisSpacing: 24,
       childAspectRatio: 0.75,
@@ -72,13 +63,3 @@ class _ProductGridViewNotifier extends StateNotifier<List<Product>> {
 final _productGridViewProvider =
     StateNotifierProvider.autoDispose<_ProductGridViewNotifier, List<Product>>(
         (ref) => _ProductGridViewNotifier());
-
-int _getCrossAxisCount(DisplayMode mode) {
-  if (mode == DisplayMode.mobile) {
-    return 2;
-  } else if (mode == DisplayMode.tablet) {
-    return 4;
-  } else {
-    return 6;
-  }
-}
