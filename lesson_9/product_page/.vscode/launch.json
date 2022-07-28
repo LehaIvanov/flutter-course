@@ -87,6 +87,27 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
+        },
+        {
+            "name": "media_query_with_provider (debug)",
+            "program": "packages/media_query_with_provider/lib/main.dart",
+            "flutterMode": "debug",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "media_query_with_provider (profile)",
+            "program": "packages/media_query_with_provider/lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "media_query_with_provider (release)",
+            "program": "packages/media_query_with_provider/lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
         }
     ]
 }
