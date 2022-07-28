@@ -21,5 +21,6 @@ class _ImageContainer extends StatelessWidget {
   final String image;
 
   @override
-  Widget build(BuildContext _context) => __imageContainer(image: image);
+  Widget build(BuildContext _context) =>
+      __imageContainer(_context, image: image);
 }
