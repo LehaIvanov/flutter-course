@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$UsersFilter {
   String get name => throw _privateConstructorUsedError;
-  int get olderThan => throw _privateConstructorUsedError;
+  int get minAge => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UsersFilterCopyWith<UsersFilter> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $UsersFilterCopyWith<$Res> {
           UsersFilter value, $Res Function(UsersFilter) then) =
       _$UsersFilterCopyWithImpl<$Res, UsersFilter>;
   @useResult
-  $Res call({String name, int olderThan});
+  $Res call({String name, int minAge});
 }
 
 /// @nodoc
@@ -47,16 +47,16 @@ class _$UsersFilterCopyWithImpl<$Res, $Val extends UsersFilter>
   @override
   $Res call({
     Object? name = null,
-    Object? olderThan = null,
+    Object? minAge = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      olderThan: null == olderThan
-          ? _value.olderThan
-          : olderThan // ignore: cast_nullable_to_non_nullable
+      minAge: null == minAge
+          ? _value.minAge
+          : minAge // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -70,7 +70,7 @@ abstract class _$$_UsersFilterCopyWith<$Res>
       __$$_UsersFilterCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, int olderThan});
+  $Res call({String name, int minAge});
 }
 
 /// @nodoc
@@ -85,16 +85,16 @@ class __$$_UsersFilterCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? olderThan = null,
+    Object? minAge = null,
   }) {
     return _then(_$_UsersFilter(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      olderThan: null == olderThan
-          ? _value.olderThan
-          : olderThan // ignore: cast_nullable_to_non_nullable
+      minAge: null == minAge
+          ? _value.minAge
+          : minAge // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -103,16 +103,16 @@ class __$$_UsersFilterCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UsersFilter implements _UsersFilter {
-  const _$_UsersFilter({required this.name, required this.olderThan});
+  const _$_UsersFilter({required this.name, required this.minAge});
 
   @override
   final String name;
   @override
-  final int olderThan;
+  final int minAge;
 
   @override
   String toString() {
-    return 'UsersFilter(name: $name, olderThan: $olderThan)';
+    return 'UsersFilter(name: $name, minAge: $minAge)';
   }
 
   @override
@@ -121,12 +121,11 @@ class _$_UsersFilter implements _UsersFilter {
         (other.runtimeType == runtimeType &&
             other is _$_UsersFilter &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.olderThan, olderThan) ||
-                other.olderThan == olderThan));
+            (identical(other.minAge, minAge) || other.minAge == minAge));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, olderThan);
+  int get hashCode => Object.hash(runtimeType, name, minAge);
 
   @JsonKey(ignore: true)
   @override
@@ -137,13 +136,12 @@ class _$_UsersFilter implements _UsersFilter {
 
 abstract class _UsersFilter implements UsersFilter {
   const factory _UsersFilter(
-      {required final String name,
-      required final int olderThan}) = _$_UsersFilter;
+      {required final String name, required final int minAge}) = _$_UsersFilter;
 
   @override
   String get name;
   @override
-  int get olderThan;
+  int get minAge;
   @override
   @JsonKey(ignore: true)
   _$$_UsersFilterCopyWith<_$_UsersFilter> get copyWith =>

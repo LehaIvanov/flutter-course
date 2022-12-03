@@ -29,98 +29,18 @@ class _SystemHash {
   }
 }
 
-String $UsersHash() => r'ea26b7e5135ec4ba2124679f4e42fb954687838f';
+String $UsersHash() => r'0278e4bb00075e778ac0078dbdf0a1c898ac62c8';
 
 /// See also [Users].
-class UsersProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<Users, List<User>> {
-  UsersProvider(
-    this.namePart,
-    this.olderThan,
-  ) : super(
-          () => Users()
-            ..namePart = namePart
-            ..olderThan = olderThan,
-          from: usersProvider,
-          name: r'usersProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product') ? null : $UsersHash,
-        );
-
-  final String namePart;
-  final int olderThan;
-
-  @override
-  bool operator ==(Object other) {
-    return other is UsersProvider &&
-        other.namePart == namePart &&
-        other.olderThan == olderThan;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, namePart.hashCode);
-    hash = _SystemHash.combine(hash, olderThan.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-
-  @override
-  FutureOr<List<User>> runNotifierBuild(
-    covariant _$Users notifier,
-  ) {
-    return notifier.build(
-      namePart,
-      olderThan,
-    );
-  }
-}
-
+final usersProvider = AutoDisposeAsyncNotifierProvider<Users, List<User>>(
+  Users.new,
+  name: r'usersProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : $UsersHash,
+);
 typedef UsersRef = AutoDisposeAsyncNotifierProviderRef<List<User>>;
 
-/// See also [Users].
-final usersProvider = UsersFamily();
-
-class UsersFamily extends Family<AsyncValue<List<User>>> {
-  UsersFamily();
-
-  UsersProvider call(
-    String namePart,
-    int olderThan,
-  ) {
-    return UsersProvider(
-      namePart,
-      olderThan,
-    );
-  }
-
+abstract class _$Users extends AutoDisposeAsyncNotifier<List<User>> {
   @override
-  AutoDisposeAsyncNotifierProviderImpl<Users, List<User>> getProviderOverride(
-    covariant UsersProvider provider,
-  ) {
-    return call(
-      provider.namePart,
-      provider.olderThan,
-    );
-  }
-
-  @override
-  List<ProviderOrFamily>? get allTransitiveDependencies => null;
-
-  @override
-  List<ProviderOrFamily>? get dependencies => null;
-
-  @override
-  String? get name => r'usersProvider';
-}
-
-abstract class _$Users extends BuildlessAutoDisposeAsyncNotifier<List<User>> {
-  late final String namePart;
-  late final int olderThan;
-
-  FutureOr<List<User>> build(
-    String namePart,
-    int olderThan,
-  );
+  FutureOr<List<User>> build();
 }

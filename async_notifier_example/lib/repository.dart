@@ -1,13 +1,13 @@
 import 'package:async_notifier_example/user.dart';
 
 class Repository {
-  static Future<List<User>> getUsers(String namePart, int olderThan) async {
+  static Future<List<User>> getUsers(String namePart, int minAge) async {
     final users = await _getAllUsers();
 
     return users
         .where((user) =>
             (namePart.isEmpty || user.name.contains(namePart)) &&
-            user.age > olderThan)
+            user.age > minAge)
         .toList();
   }
 

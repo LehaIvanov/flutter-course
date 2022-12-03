@@ -42,32 +42,12 @@ Widget _myHomePage(BuildContext context, {required String title}) {
         ],
       ),
     ),
-    // body: Center(
-    //   child: Column(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: <Widget>[
-    //       const Text(
-    //         'You have pushed the button this many times:',
-    //       ),
-    //       Text(
-    //         'Counter value',
-    //         style: Theme.of(context).textTheme.headline4,
-    //       ),
-    //     ],
-    //   ),
-    // ),
-    // floatingActionButton: FloatingActionButton(
-    //   onPressed: () => counter.value++,
-    //   tooltip: 'Increment',
-    //   child: const Icon(Icons.add),
-    // ),
   );
 }
 
 @hcwidget
 Widget _usersList(WidgetRef ref) {
-  final filter = ref.watch(usersFilterProvider);
-  final users = ref.watch(usersProvider(filter.name, filter.olderThan));
+  final users = ref.watch(usersProvider);
 
   return users.when(
     data: (data) => Column(
@@ -81,7 +61,7 @@ Widget _usersList(WidgetRef ref) {
 @hcwidget
 Widget _addUserForm(WidgetRef ref) {
   final name = useRef('');
-  final olderThan = useRef(0);
+  final minAge = useRef(0);
 
   return Column(
     children: [
@@ -89,7 +69,7 @@ Widget _addUserForm(WidgetRef ref) {
         onChanged: (value) => name.value = value,
       ),
       TextField(
-        onChanged: (value) => olderThan.value = int.parse(value),
+        onChanged: (value) => minAge.value = int.parse(value),
         keyboardType: TextInputType.number,
         inputFormatters: <TextInputFormatter>[
           FilteringTextInputFormatter.digitsOnly
@@ -98,10 +78,8 @@ Widget _addUserForm(WidgetRef ref) {
       ElevatedButton(
         onPressed: () {
           ref
-              .read(usersProvider(ref.read(usersFilterProvider).name,
-                      ref.read(usersFilterProvider).olderThan)
-                  .notifier)
-              .addUser(User(age: olderThan.value, name: name.value));
+              .read(usersProvider.notifier)
+              .addUser(User(age: minAge.value, name: name.value));
         },
         child: const Text('Add user'),
       ),
@@ -112,7 +90,7 @@ Widget _addUserForm(WidgetRef ref) {
 @hcwidget
 Widget _usersFilterWidget(WidgetRef ref) {
   final name = useRef('');
-  final olderThan = useRef(0);
+  final minAge = useRef(0);
 
   return Column(
     children: [
@@ -120,7 +98,7 @@ Widget _usersFilterWidget(WidgetRef ref) {
         onChanged: (value) => name.value = value,
       ),
       TextField(
-        onChanged: (value) => olderThan.value = int.parse(value),
+        onChanged: (value) => minAge.value = int.parse(value),
         keyboardType: TextInputType.number,
         inputFormatters: <TextInputFormatter>[
           FilteringTextInputFormatter.digitsOnly
@@ -129,7 +107,7 @@ Widget _usersFilterWidget(WidgetRef ref) {
       ElevatedButton(
         onPressed: () {
           ref.read(usersFilterProvider.notifier).state =
-              UsersFilter(name: name.value, olderThan: olderThan.value);
+              UsersFilter(name: name.value, minAge: minAge.value);
         },
         child: const Text('Search'),
       ),

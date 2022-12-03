@@ -6,6 +6,6 @@ part 'users_filter.freezed.dart';
 class UsersFilter with _$UsersFilter {
   const factory UsersFilter({
     required String name,
-    required int olderThan,
+    required int minAge,
   }) = _UsersFilter;
 }
